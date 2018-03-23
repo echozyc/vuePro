@@ -16,7 +16,7 @@
         </p>
         <div class="second-body-top-img">
           <div v-for="(l,index) in c.list" :key="index">
-            <img :src=l.photo alt="">
+            <img v-lazy=l.photo alt="">
             <span>{{l.name}}</span>
           </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="second-body-top-img">
           <div v-for="(l,index) in c.list" :key="index">
             <div>
-              <img :src=l.logo alt="">
+              <img v-lazy=l.logo alt="">
             </div>
             <span>{{l.name}}</span>
           </div>
@@ -68,7 +68,7 @@
          this.$nextTick(function () {
           new BScroll('.second-body-content',{
               scrollY: true,
-             click: true
+              click: true
            })
          })
         }
@@ -120,11 +120,12 @@
       padding 5px
       margin-top 5px
       flex-direction column
-      position absolute
       top 45px
       right 0
       overflow hidden
-      height 600px
+      position fixed
+      right 0
+      height calc(100% - 106px)
       box-sizing border-box
       .www
        .second-body-content-top

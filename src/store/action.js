@@ -7,11 +7,12 @@ import {reqallbrands,reqbrand,reqcategorys,reqhomepage} from '../api/index'
 
 
 export default {
-  async getallbrands({commit}){
+  async getallbrands({commit},cb){
     const result = await reqallbrands()
     if(result.code === 0){
       const allbrands = result.data
       commit(RECALLBRANDS,allbrands)
+      cb && cb()
     }
   },
   async getbrand({commit}){

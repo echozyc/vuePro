@@ -9,7 +9,7 @@
          <div class="second-right-content-bottom">
            <div v-for="(list,index) in b.list"  :key="index">
              <div class="img-wrap">
-               <img :src='list.logo' alt="">
+               <img v-lazy='list.logo' alt="">
              </div>
              <p>{{list.name}}</p>
              <p>{{list.address}}</p>

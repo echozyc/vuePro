@@ -46,7 +46,7 @@
       <div class="swiper-container swiper-container-second">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(i,index) in homepage.dog_banner" :key="index">
-          <img :src=i alt="">
+          <img v-lazy=i alt="">
         </div>
       </div>
       <!-- Add Pagination -->
@@ -55,16 +55,16 @@
     </div>
     <!--dog-->
     <div class="first-inner-dog">
-      <img :src=homepage.dog_img alt="">
+      <img v-lazy=homepage.dog_img alt="">
     </div>
     <!--列表logo-->
     <div class="first-inner-logo-list">
       <div v-for="(i,index) in homepage.menu_list" :key="index">
-        <img :src=i alt="">
+        <img v-lazy=i alt="">
       </div>
     </div>
     <div class="first-inner-onepage">
-      <img :src=homepage.miaosha alt="">
+      <img v-lazy=homepage.miaosha alt="">
     </div>
     <!--每日疯抢-->
     <div class="first-inner-oneday">
@@ -128,44 +128,44 @@
     </div>
     <!--品牌力量-->
     <div class="first-inner-twopage">
-      <img :src=homepage.brand_power alt="">
+      <img v-lazy=homepage.brand_power alt="">
 
     </div>
     <!--动图-->
     <div class="first-inner-dongtu">
-      <img :src=homepage.gif alt="">
+      <img v-lazy=homepage.gif alt="">
     </div>
 
     <!--vip尊享-->
     <div class="first-inner-onepage">
-      <img :src=homepage.vip alt="">
+      <img v-lazy=homepage.vip alt="">
     </div>
     <!--四张-->
     <div class="first-inner-fourimg" >
       <div class="first-inner-fourimg-left">
-      <img :src=homepage.vip_services[0] alt="">
-      <img :src=homepage.vip_services[1] alt="">
+      <img v-lazy=homepage.vip_services[0] alt="">
+      <img v-lazy=homepage.vip_services[1] alt="">
       </div>
       <div class="first-inner-fourimg-right">
-        <img :src=homepage.vip_services[2] alt="">
-       <img :src=homepage.vip_services[3] alt="">
+        <img v-lazy=homepage.vip_services[2] alt="">
+       <img v-lazy=homepage.vip_services[3] alt="">
       </div>
     </div>
     <!--带你一折团-->
     <div class="first-inner-onepage">
-      <img :src=homepage.dapaituan alt="">
+      <img v-lazy=homepage.dapaituan alt="">
     </div>
     <!--自动轮播-->
     <div class="first-inner-autolunbo">
       <div class="swiper-container swiper-container-fourth">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(i,index) in homepage.dapaituan_list"><img :src=i alt=""></div>
+          <div class="swiper-slide" v-for="(i,index) in homepage.dapaituan_list"><img v-lazy=i alt=""></div>
         </div>
       </div>
     </div>
     <!--大牌好货-->
     <div class="first-inner-onepage">
-      <img :src=homepage.haohuo alt="">
+      <img v-lazy=homepage.haohuo alt="">
     </div>
 
     <div class="first-wrap-body-scroll" >
@@ -248,29 +248,29 @@
     </div>
     <!--最惨奖-->
     <div class="first-inner-onepage zuican">
-      <img :src=homepage.zuican alt="">
+      <img v-lazy=homepage.zuican alt="">
     </div>
     <!--最惨2-->
     <div class="first-inner-zuican">
-      <img :src=homepage.zuican_content alt="">
+      <img v-lazy=homepage.zuican_content alt="">
     </div>
     <!--特别星球-->
     <div class="first-inner-onepage tebie">
-      <img :src=homepage.special alt="">
+      <img v-lazy=homepage.special alt="">
     </div>
 
     <div class="first-inner-lastpage">
       <div  class="first-inner-lastpage-left">
-        <img :src=homepage.special_list[0] alt="">
+        <img v-lazy=homepage.special_list[0] alt="">
       </div>
       <div  class="first-inner-lastpage-right">
-        <img :src=homepage.special_list[1] alt="">
-        <img :src=homepage.special_list[2] alt="">
+        <img v-lazy=homepage.special_list[1] alt="">
+        <img v-lazy=homepage.special_list[2] alt="">
       </div>
     </div>
    <!--栏目-->
     <div class="first-inner-onepage manmu">
-      <img :src=homepage.lanmu alt="">
+      <img v-lazy=homepage.lanmu alt="">
     </div>
     <!--底部最後-->
     <div class="first-inner-last">

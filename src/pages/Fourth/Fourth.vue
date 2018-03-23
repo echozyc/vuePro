@@ -23,42 +23,52 @@
     </div>
     <div class="fourth-body-wrap">
 
-
-      <div class="fourth-body-input" v-if="ishowa">
+      <!--<form @submit.prevent="login">-->
+       <div class="fourth-body-input" v-if="ishowa">
       <div class="third-body-input-top" >
         <i class="iconfont icon-denglu"></i>
-        <input type="text" placeholder="请输入手机号/邮箱/用户名">
+        <input type="text" placeholder="请输入用户名" maxlength="8" v-model="name">
       </div>
       <div class="third-body-input-bottom">
         <i class="iconfont icon-14"></i>
-        <input type="text" placeholder="请输入密码">
+        <input type="text" placeholder="请输入密码" maxlength="10" v-model="password">
       </div>
     </div>
 
-      <div class="fourth-body-input2"v-if="ishowb">
+       <div class="fourth-body-input2"v-if="ishowb">
         <div class="third-body-input-top">
           <i class="iconfont icon-shouji"></i>
-          <input type="text" placeholder="请输入手机号">
+          <input type="text" placeholder="请输入手机号"  maxlength="11" v-model="phone">
         </div>
         <div class="third-body-input-top">
           <i class="iconfont icon-14"></i>
-          <input type="text" placeholder="请输入密码">
+          <input type="text" placeholder="请输入密码" maxlength="10" v-model="password">
         </div>
-        <div class="third-body-input-bottom">
+
+        <!--1-->
+        <div class="third-body-input-bottom" v-if="!computeTime" >
           <i class="iconfont icon-14"></i>
-          <input type="text" placeholder="请输入验证码">
-          <a href="javascript:;">获取动态验证码</a>
+          <input type="text" placeholder="请输入验证码"  maxlength="4">
+          <a href="javascript:;" @click.prevent="getCode" :class="{on:rightphone}">获取动态验证码</a>
+        </div>
+        <!--2-->
+        <div class="third-body-input-bottom" v-if="computeTime">
+          <i class="iconfont icon-14"></i>
+          <input type="text" placeholder="请输入验证码" maxlength="4" v-model="code">
+          <a href="javascript:;" class="on">剩余{{computeTime}}s</a>
         </div>
       </div>
 
 
 
-      <div class="fourth-body-text">
+       <div class="fourth-body-text">
         忘记密码？
       </div>
-      <div class="fourth-body-denglu">
-        <div>登&nbsp&nbsp&nbsp&nbsp&nbsp录</div>
+       <div class="fourth-body-denglu" @click="login">
+        <!--<div>登&nbsp&nbsp&nbsp&nbsp&nbsp录</div>-->
+         <mt-button class="b">登&nbsp&nbsp&nbsp&nbsp&nbsp录</mt-button>
       </div>
+      <!--</form>-->
       <div class="fourth-body-hezuo">
         合作网站登录
       </div>
@@ -67,16 +77,44 @@
         <i class="iconfont icon-zhifubao"></i>
         <i class="iconfont icon-weixin"></i>
       </div>
+
+
     </div>
   </div>
 </template>
 
 <script>
+  import { MessageBox } from 'mint-ui';
   export default {
     data(){
       return {
         ishowa:true,
-        ishowb:false
+        ishowb:false,
+
+        name:'',   //姓名
+        password:'',    //密码
+
+        phone:'',   //号码初始
+        code:'',  //验证码初始
+        computeTime: 0, //计时时间
+
+        alertText: '', // 提示框文本
+        alertShow: false, //是否显示提示框
+      }
+    },
+    computed:{
+       //      计算属性
+      rightphone(){
+        return /^1\d{10}$/.test(this.phone)
+      },
+      rightcode(){
+        return /^\w{4}$/.test(this.code)
+      },
+      rightname(){
+        return /^[a-zA-Z]{4,8}$/.test(this.name)
+      },
+      rightpassword(){
+        return /^\d{6,10}$/.test(this.password)
       }
     },
     methods:{
@@ -87,8 +125,54 @@
       showb(){
         this.ishowa = false
         this.ishowb = true
+      },
+
+     //  获取验证码 样式改变
+      getCode () {
+        if (this.rightphone) {
+          this.computeTime = 10
+          // 启动循环定时器, 每隔1s减少1
+          const intervalId = setInterval(() => {
+            this.computeTime--
+            //如果到时, 停止计时
+            if (this.computeTime === 0) {
+              clearInterval(intervalId)
+            }
+          }, 1000)
+        }
+
+  },
+
+     //     登陆前台判断
+      login(){
+        if(this.ishowb){
+          const {rightphone, phone,rightcode,rightpassword} = this
+          if(!rightphone) { // 手机号
+            MessageBox.confirm("请输入正确的手机号")
+            return
+          }else if(!rightcode){
+            MessageBox.confirm("请输入正确的验证码")
+            return
+          }else if(!rightpassword) {
+            MessageBox.confirm("请输入正确的密码")
+            return
+          }
+        } else if(this.ishowa)  {
+          const {rightname,rightpassword} = this
+          if(!rightname){
+            MessageBox.confirm("请输入正确的用户名")
+            return
+          } else if(!rightpassword){
+            MessageBox.confirm("请输入正确的密码")
+            return
+          }
+        }
+
+
+        this.$router.push('/first')
       }
-    }
+    },
+
   }
 </script>
 
@@ -243,15 +327,17 @@
              height 30px
              background #ffffff
              border-radius 5px
-             color: #ff4259;
-             border: 1px solid #eb4c33;
+             color: #7e8c8d
+             border: 1px solid #7e8c8d
              font-size 10px
              display flex
              justify-content center
              align-items center
              position absolute
              right 0
-
+           .on
+               border: 1px solid #eb4c33;
+               color #ff4259;
        .fourth-body-text
          font-size 14px
          color #7e8c8d
@@ -265,8 +351,9 @@
          height 38px
          padding:0 10px
          box-sizing border-box
-         div
+         .b
             background #2ec975
+            width 100%
             height 100%
             border-radius 5px
             display: flex

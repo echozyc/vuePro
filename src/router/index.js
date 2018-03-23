@@ -9,7 +9,11 @@ import Tleft from "../pages/Tleft/Tleft.vue"
 import Tright from '../pages/Tright/Tright.vue'
 import TRlist from '../pages/TRlist/TRlist.vue'
 
+
+
 Vue.use(Router)
+
+
 
 export default new Router({
   routes: [

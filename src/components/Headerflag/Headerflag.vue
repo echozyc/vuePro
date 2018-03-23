@@ -8,19 +8,19 @@
     <transition name="move">
       <div class="headerflag-wrap" v-if="ishow">
       <div>
-        <i class="iconfont icon-shouye"></i>
+        <i class="iconfont icon-shouye" @click="$router.push('/first')"></i>
         <span>首页</span>
       </div>
       <div>
-        <i class="iconfont icon-shangpinfenlei"></i>
+        <i class="iconfont icon-shangpinfenlei" @click="$router.push('/second')"></i>
         <span>商品分类</span>
       </div>
       <div>
-        <i class="iconfont icon-gouwuche1"></i>
+        <i class="iconfont icon-gouwuche1" @click="$router.push('/third')"></i>
         <span>购物车</span>
       </div>
       <div>
-        <i class="iconfont icon-chongwu"></i>
+        <i class="iconfont icon-chongwu" @click="$router.push('/fourth')"></i>
         <span>我的e宠</span>
       </div>
     </div>
